@@ -958,11 +958,9 @@ function goto_parent_dir()
 end
 
 function try_open_at_cursor()
-	if micro.CurPane() ~= tree_view or scanlist_is_empty() then
-		return
+	if micro.CurPane() == tree_view then
+		try_open_at_y(tree_view.Cursor.Loc.Y)
 	end
-
-	try_open_at_y(tree_view.Cursor.Loc.Y)
 end
 
 -- ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -1089,7 +1087,7 @@ function onMousePress(view)
 	if view == tree_view then
 		-- Try to open whatever is at the click's y index
 		-- Will go into/back dirs based on what's clicked, nothing gets expanded
-		try_open_at_y(tree_view.Cursor.Loc.Y)
+		try_open_at_cursor()
 		-- Don't actually allow the mousepress to trigger, so we avoid highlighting stuff
 		return false
 	end
@@ -1136,7 +1134,7 @@ function preIndentSelection(view)
 		tab_pressed = true
 		-- Open the file
 		-- Using tab instead of enter, since enter won't work with Readonly
-		try_open_at_y(tree_view.Cursor.Loc.Y)
+		try_open_at_cursor()
 		-- Don't actually insert a tab
 		return false
 	end
