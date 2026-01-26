@@ -438,6 +438,12 @@ end
 -- Prompts the user for deletion of a file/dir when triggered
 -- Not local so Micro can access it
 function prompt_delete_at_cursor()
+
+	if micro.CurPane() ~= tree_view then
+		micro.InfoBar():Message('"rm" only works with the cursor in the tree!')
+		return
+	end
+
 	local y = get_safe_y()
 	-- Don't let them delete the top 3 index dir/separator/..
 	if y == 0 or scanlist_is_empty() then
