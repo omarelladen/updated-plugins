@@ -647,6 +647,13 @@ function rename_at_cursor(bp, args)
 	local old_path = scanlist[y].abspath
 	-- Join the path into their supplied rename, so that we have an absolute path
 	local new_path = dirname_and_join(old_path, new_name)
+
+	-- Check if the name is already taken by a file/dir
+	if path_exists(new_path) then
+		micro.InfoBar():Error("You can't create a file/dir with a pre-existing name")
+		return
+	end
+
 	-- Use Go's os package for renaming the file/dir
 	local golib_os = import("os")
 	-- Actually rename the file
