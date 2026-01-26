@@ -452,7 +452,7 @@ function prompt_delete_at_cursor()
 		return
 	end
 
-    micro.InfoBar():YNPrompt("Do you want to delete the " .. (scanlist[y].dirmsg ~= "" and "dir" or "file") .. ' "' .. scanlist[y].abspath .. '"? ', function(yes, canceled)
+    micro.InfoBar():YNPrompt("Do you want to delete the " .. (scanlist[y].dirmsg ~= "" and "dir" or "file") .. ' "' .. scanlist[y].abspath .. '"? (y/n) ', function(yes, canceled)
         if yes and not canceled then
             -- Use Go's os.Remove to delete the file
             local go_os = import("os")
