@@ -1362,9 +1362,12 @@ function init()
     config.MakeCommand("mkdir", new_dir, config.NoComplete)
     -- Delete a file/dir, and anything contained in it if it's a dir
     config.MakeCommand("rm", prompt_delete_at_cursor, config.NoComplete)
+
     -- Adds colors to the ".." and any dir's in the tree view via syntax highlighting
     -- TODO: Change it to work with git, based on untracked/changed/added/whatever
     config.AddRuntimeFile("filemanager", config.RTSyntax, "syntax.yaml")
+    -- Add the help file
+    config.AddRuntimeFile("filemanager", config.RTHelp, "help/filemanager.md")
 
     -- NOTE: This must be below the syntax load command or coloring won't work
     -- Just auto-open if the option is enabled
